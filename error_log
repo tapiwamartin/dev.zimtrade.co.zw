@@ -1,0 +1,8 @@
+[06-Jan-2022 16:11:56 UTC] PHP Warning:  require_once(/home/martin/public_html/bootstrap/app.php): failed to open stream: No such file or directory in /home/martin/public_html/artisan on line 20
+[06-Jan-2022 16:11:56 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/martin/public_html/bootstrap/app.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/martin/public_html/artisan on line 20
+[06-Jan-2022 16:12:16 UTC] PHP Warning:  require_once(/home/martin/public_html/bootstrap/app.php): failed to open stream: No such file or directory in /home/martin/public_html/artisan on line 20
+[06-Jan-2022 16:12:16 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/martin/public_html/bootstrap/app.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/martin/public_html/artisan on line 20
+[06-Jan-2022 16:14:31 UTC] PHP Warning:  require_once(/home/martin/public_html/bootstrap/app.php): failed to open stream: No such file or directory in /home/martin/public_html/artisan on line 20
+[06-Jan-2022 16:14:31 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/martin/public_html/bootstrap/app.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/martin/public_html/artisan on line 20
+[06-Jan-2022 16:14:46 UTC] PHP Warning:  require_once(/home/martin/public_html/bootstrap/app.php): failed to open stream: No such file or directory in /home/martin/public_html/artisan on line 20
+[06-Jan-2022 16:14:46 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/martin/public_html/bootstrap/app.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home/martin/public_html/artisan on line 20
