@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ticket;
+use App\Models\Deposit;
 use App\Models\TicketFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

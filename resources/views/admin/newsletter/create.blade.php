@@ -95,7 +95,7 @@
                 request.onload = function () {
                     window.location = '/newsletter';
 
-                    //document.getElementById('create-ticket').innerText = 'Create Ticket'
+                    //document.getElementById('create-ticket').innerText = 'Create Deposit'
 
                 }
             }

@@ -32,7 +32,7 @@ class InquiryReopened extends Mailable
     public function build()
     {
         return $this->from('zimhelpdesk@zimtrade.co.zw')
-                ->markdown('emails.tickets.reopened', [
+                ->markdown('emails.deposits.reopened', [
                     'ticket'=>$this->ticket,
 
                 ]);

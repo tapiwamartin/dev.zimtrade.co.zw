@@ -17,10 +17,12 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
+                                @foreach($regions as $region)
                                 <table class="table table-bordered" id="table1" >
+                                    <tr><u><b class="text-uppercase">{{$region->name}}</b></u></tr>
                                     <thead>
                                         <tr>
-                                            <th>Sector</th>
+                                            <th>Re</th>
                                             <th>Closed</th>
                                             <th>Opened</th>
                                             <th>Re-opened</th>
@@ -30,16 +32,15 @@
                                     </thead>
 
                                     <tbody>
-                                       @for($i=0;$i<sizeof($e);$i++)
-                                        <tr>
-                                            <td>{{$e[$i]['sector']}}</td>
-                                            <td>{{$e[$i]['closed']}}</td>
-                                            <td>{{$e[$i]['opened']}}</td>
-                                            <td>{{$e[$i]['reopened']}}</td>
-                                            <td>{{$e[$i]['overdue']}}</td>
 
-                                        </tr>
-                                        @endfor
+
+                                        @foreach($region->deposits as $deposit)
+                                            <tr>
+                                                <td>{{$deposit->user->email}}</td>
+                                            </tr>
+                                        @endforeach
+                                    @endforeach
+
 
                                     </tbody>
                                 </table>

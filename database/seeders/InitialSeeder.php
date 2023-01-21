@@ -2,14 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Sector;
-use App\Models\Status;
+use App\Models\Narration;
+use App\Models\Region;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use App\Models\Admin;
 use App\Models\RoleUser;
 use App\Models\User;
 use App\Models\Role;
+use Illuminate\Support\Facades\Schema;
 class InitialSeeder extends Seeder
 {
     /**
@@ -20,65 +22,49 @@ class InitialSeeder extends Seeder
     public function run()
     {
 
-        $status = new Status;
-        $status->name = "opened";
-        $status->save();
+        $narration = new Narration();
+        $narration->name = "Expense";
+        $narration->save();
 
-        $status = new Status;
-        $status->name = "closed";
-        $status->save();
+        $narration = new Narration;
+        $narration->name = "Income";
+        $narration->save();
 
-        $status = new Status;
-        $status->name ="re-opened";
-        $status->save();
 
-        $status = new Status;
-        $status->name ="overdue";
-        $status->save();
 
 
         /*Sectors*/
-        $sector = new Sector;
-        $sector->name ="Agricultural";
-        $sector->save();
+        $region = new Region;
+        $region->name ="Manicaland";
+        $region->save();
 
-        $sector = new Sector;
-        $sector->name ="Information and Communication Technology";
-        $sector->save();
+        $region = new Region;
+        $region->name ="Mashonaland Central";
+        $region->save();
 
-        $sector = new Sector;
-        $sector->name ="Manufacturing";
-        $sector->save();
+        $region = new Region;
+        $region->name ="Mashonaland East";
+        $region->save();
 
-        $sector = new Sector;
-        $sector->name ="Tourism";
-        $sector->save();
-
-        $sector = new Sector;
-        $sector->name ="Banking";
-        $sector->save();
-
-        $sector = new Sector;
-        $sector->name ="Art and Crafts";
-        $sector->save();
 
 
     	$role = new Role;
-    	$role->name = "Admin";
+    	$role->name = "Administrator";
     	$role->save();
 
     	$role = new Role;
-    	$role->name = "Agent";
+    	$role->name = "Supervisor";
     	$role->save();
 
         $user = new User;
         $user->name ="Administrator";
-        $user->email="admin@zimtrade.co.zw";
-        $user->organisation="ZimTrade";
-        $user->phonenumber="+263773072202";
+        $user->email="admin@wallet.co.zw";
+        $user->organisation="Wallet";
+        $user->phonenumber="+26377200000";
         $user->isAuthorised=1;
         $user->city="Harare";
         $user->country="Zimbabwe";
+        $user->email_verified_at=Carbon::now();
         $user->password =bcrypt("secret");
         $user->save();
 

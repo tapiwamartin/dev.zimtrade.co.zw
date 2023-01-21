@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\RoleUser;
-use App\Models\Sector;
+use App\Models\Region;
 use App\Models\Status;
-use App\Models\Ticket;
+use App\Models\Deposit;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
@@ -24,30 +24,9 @@ class ReportController extends Controller
     }
     public function daily()
     {
-        $report = array();
-        $daily = Carbon::now();
-        $reportType ="Inquiries Report as at".' '.CarbonImmutable::now()->calendar();
-        $sectors= Sector::get();
-        $status = Status::get();
-
-        for($i=0; $i<sizeof($sectors);$i++)
-        {
-
-            $countClosed = Ticket::where(['statusId' => 2, 'sectorId' => $sectors[$i]->id])->whereDate('created_at', Carbon::parse($daily)->toDateString())->count();
-            $countOpened = Ticket::where(['statusId' => 1, 'sectorId' => $sectors[$i]->id])->whereDate('created_at', Carbon::parse($daily)->toDateString())->count();
-            $countReOpened = Ticket::where(['statusId' => 3, 'sectorId' => $sectors[$i]->id])->whereDate('created_at', Carbon::parse($daily)->toDateString())->count();
-            $countOverdue = Ticket::where(['statusId' => 4, 'sectorId' => $sectors[$i]->id])->whereDate('created_at', Carbon::parse($daily)->toDateString())->count();
-            $report[] = array(["sector" => $sectors[$i]->name, "closed" => $countClosed, "opened" => $countOpened, "reopened" => $countReOpened,"overdue"=>$countOverdue]);
-
-        }
-
-        $data = collect($report);
-        $e = $data->flatten(1);
-
-        return view('admin.reports.index')->with('e',$e)->withReportType($reportType);
-
-
-
+        $reportType ="Deposits Report as at".' '.CarbonImmutable::now()->calendar();
+        $regions = Region::with('deposits')->get();
+        return view('admin.reports.index')->withReportType($reportType)->withRegions($regions);
 
     }
 
@@ -56,17 +35,17 @@ class ReportController extends Controller
         $daily = Carbon::now()->addDay();
         $weekDate = Carbon::now()->subDays(8);
         $reportType ="Inquiries Report as from".' '.Carbon::parse($weekDate)->toDateString().' '.'to'.' '.Carbon::parse($daily)->toDateString();
-        $sector = Sector::get();
+        $sector = Region::get();
         $report = array();
         $range = collect(CarbonPeriod::create($weekDate,$daily));
 
 
         for($i=0; $i<sizeof($sector);$i++) {
-            $countClosed = Ticket::where(['statusId'=>2 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($weekDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
+            $countClosed = Deposit::where(['statusId'=>2 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($weekDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
 
-            $countOpened = Ticket::where(['statusId'=>1 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($weekDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
-            $countReOpened = Ticket::where(['statusId'=>3 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($weekDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
-            $countOverdue = Ticket::where(['statusId'=>4 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($weekDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
+            $countOpened = Deposit::where(['statusId'=>1 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($weekDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
+            $countReOpened = Deposit::where(['statusId'=>3 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($weekDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
+            $countOverdue = Deposit::where(['statusId'=>4 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($weekDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
             $report[]= array(["sector"=>$sector[$i]->name,"closed"=>$countClosed,"opened"=>$countOpened,"reopened"=>$countReOpened,"overdue"=>$countOverdue]);
         }
         $data = collect($report);
@@ -83,7 +62,7 @@ class ReportController extends Controller
         $reportType ="Inquiries Report as from".' '.Carbon::parse($monthDate)->toDateString().' '.'to'.' '.Carbon::parse($daily)->toDateString();
         $range = collect(CarbonPeriod::create($monthDate,$daily));
 
-        $sector = Sector::get();
+        $sector = Region::get();
         $report= array();
         $range = collect(CarbonPeriod::create($monthDate,$daily));
 
@@ -91,11 +70,11 @@ class ReportController extends Controller
         for($i=0; $i<sizeof($sector);$i++) {
 
 
-            $countClosed = Ticket::where(['statusId'=>2 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($monthDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
+            $countClosed = Deposit::where(['statusId'=>2 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($monthDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
 
-            $countOpened = Ticket::where(['statusId'=>1 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($monthDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
-            $countReOpened = Ticket::where(['statusId'=>3 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($monthDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
-            $countOverdue = Ticket::where(['statusId'=>4 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($monthDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
+            $countOpened = Deposit::where(['statusId'=>1 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($monthDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
+            $countReOpened = Deposit::where(['statusId'=>3 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($monthDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
+            $countOverdue = Deposit::where(['statusId'=>4 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($monthDate)->toDateString(),Carbon::parse($daily)->toDateString()])->count();
 
             $report[]= array(["sector"=>$sector[$i]->name,"closed"=>$countClosed,"opened"=>$countOpened,"reopened"=>$countReOpened,"overdue"=>$countOverdue]);
 
@@ -123,7 +102,7 @@ class ReportController extends Controller
         $reportType ="Inquiries Report as from".' '.Carbon::parse($startDate)->toDateString().' '.'to'.' '.Carbon::parse($endDate)->toDateString();
         //$range = collect(CarbonPeriod::create($request->startDate,$request->endDate));
 
-        $sector = Sector::get();
+        $sector = Region::get();
         $report= array();
 
 
@@ -131,11 +110,11 @@ class ReportController extends Controller
         for($i=0; $i<sizeof($sector);$i++) {
 
 
-            $countClosed = Ticket::where(['statusId'=>2 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($startDate)->toDateString(),Carbon::parse($endDate)->toDateString()])->count();
+            $countClosed = Deposit::where(['statusId'=>2 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($startDate)->toDateString(),Carbon::parse($endDate)->toDateString()])->count();
 
-            $countOpened = Ticket::where(['statusId'=>1 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($startDate)->toDateString(),Carbon::parse($endDate)->toDateString()])->count();
-            $countReOpened = Ticket::where(['statusId'=>3 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($startDate)->toDateString(),Carbon::parse($endDate)->toDateString()])->count();
-            $countOverdue = Ticket::where(['statusId'=>4 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($startDate)->toDateString(),Carbon::parse($endDate)->toDateString()])->count();
+            $countOpened = Deposit::where(['statusId'=>1 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($startDate)->toDateString(),Carbon::parse($endDate)->toDateString()])->count();
+            $countReOpened = Deposit::where(['statusId'=>3 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($startDate)->toDateString(),Carbon::parse($endDate)->toDateString()])->count();
+            $countOverdue = Deposit::where(['statusId'=>4 ,'sectorId' => $sector[$i]->id])->whereBetween('created_at',[Carbon::parse($startDate)->toDateString(),Carbon::parse($endDate)->toDateString()])->count();
 
             $report[]= array(["sector"=>$sector[$i]->name,"closed"=>$countClosed,"opened"=>$countOpened,"reopened"=>$countReOpened,"overdue"=>$countOverdue]);
 

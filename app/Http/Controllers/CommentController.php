@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\CommentCreated;
 use App\Mail\InquiryClosed;
 use App\Models\Comment;
-use App\Models\Ticket;
+use App\Models\Deposit;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Mail;
@@ -56,7 +56,7 @@ class CommentController extends Controller
         $comment->userId = Auth::id();
         $comment->ticketId = $request->ticket;
         $comment->save();
-        $ticket = Ticket::find($request->ticket);
+        $ticket = Deposit::find($request->ticket);
       if(Auth::id() == $request->userId)
         {
             Mail::to($ticket->ticketOwner)->queue(new CommentCreated($comment,$ticket));

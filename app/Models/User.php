@@ -70,7 +70,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function tickets()
     {
-        return $this->hasMany(Ticket::class,'agentId','id');
+        return $this->hasMany(Deposit::class,'agentId','id');
     }
      public function comments()
     {

@@ -69,7 +69,7 @@ class NewsletterFileController extends Controller
             //Mail::to($agent)->send(new InquiryOpened($ticket));
         }
         return redirect()->route('ticket.index');
-        //return response()->json(['data'=>'Ticket Created Successfully']);
+        //return response()->json(['data'=>'Deposit Created Successfully']);
 
     }
 

@@ -62,7 +62,7 @@
 
                         <div class="col-md-12 col-12">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-block btn-success">
+                                <button type="submit" class="btn btn-block btn-primary">
                                     {{ __('Login') }}
                                 </button>
                                 <div class="row">
@@ -87,14 +87,7 @@
                 </div>
             </div>
         </div>
-        <footer>
-            <div class="footer clearfix mb-0 text-muted">
-                <div class="float-start">
-                    <p>2021 &copy; ZimTrade</p>
-                </div>
-                
-            </div>
-        </footer>
+
     </div>
 
 </div>

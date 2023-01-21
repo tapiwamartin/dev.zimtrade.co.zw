@@ -23,7 +23,6 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Action</th>
-                                            <th>Subject</th>
                                             <th>Properties</th>
                                             <th>Transaction Created</th>
 
@@ -36,9 +35,9 @@
                                         @forelse($activities as $activity)
                                         <tr>
                                             <td>{{$activity->id}}</td>
-                                            <td>{{$activity->description}}</td>
                                             <td>
-                                                {{$activity->subject_type}}</td>
+
+                                                {{$activity->description}} {{substr(strrchr($activity->subject_type, '\\'),1)}}</td>
                                             <td>
                                                 @forelse($activity->properties['attributes'] as $property)
                                                  {{$property}}

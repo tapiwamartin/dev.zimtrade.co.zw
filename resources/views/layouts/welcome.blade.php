@@ -84,8 +84,8 @@
         </section>
         <footer>
             <div class="footer clearfix mb-0 text-muted">
-                <div class="float-start">
-                    <p>2021 &copy; ZimTrade</p>
+                <div class="text-center">
+                    <p><script>document.write(new Date().getFullYear())</script> &copy ZimTrade</p>
                 </div>
                 
             </div>

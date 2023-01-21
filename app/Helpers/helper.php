@@ -1,71 +1,71 @@
 <?php
-use App\Models\Ticket;
+use App\Models\Deposit;
 use App\Models\User;
 use Carbon\Carbon;
 
 function getOpenTickets($id)
 {
-	$tickets = Ticket::where(['userId'=>$id])->where(['statusId'=>1])->count();
+	$tickets = Deposit::where(['userId'=>$id])->where(['statusId'=>1])->count();
 
      return $tickets;
 }
 
 function getClosedTickets($id)
 {
-	$tickets = Ticket::where(['userId'=>$id])->where(['statusId'=>2])->count();
+	$tickets = Deposit::where(['userId'=>$id])->where(['statusId'=>2])->count();
 
      return $tickets;
 }
 function getReopenedTickets($id)
 {
-    $tickets = Ticket::where(['userId'=>$id])->where(['statusId'=>3])->count();
+    $tickets = Deposit::where(['userId'=>$id])->where(['statusId'=>3])->count();
 
     return $tickets;
 }
 
 function getOverDueTickets($id)
 {
-    $tickets = Ticket::where(['userId'=>$id])->where(['statusId'=>4])->count();
+    $tickets = Deposit::where(['userId'=>$id])->where(['statusId'=>4])->count();
 
     return $tickets;
 }
 
 function getAssignedTicketsClosed($id)
 {
-    $tickets = Ticket::where(['agentId'=>$id])->where(['statusId'=>2])->count();
+    $tickets = Deposit::where(['agentId'=>$id])->where(['statusId'=>2])->count();
 
     return $tickets;
 }
 function getAssignedTicketsOpened($id)
 {
-    $tickets = Ticket::where(['agentId'=>$id])->where(['statusId'=>1])->count();
+    $tickets = Deposit::where(['agentId'=>$id])->where(['statusId'=>1])->count();
 
     return $tickets;
 }
 function getAssignedTicketsReopened($id)
 {
-    $tickets = Ticket::where(['agentId'=>$id])->where(['statusId'=>3])->count();
+    $tickets = Deposit::where(['agentId'=>$id])->where(['statusId'=>3])->count();
 
     return $tickets;
 }
 
 function getAssignedTicketsOverdue($id)
 {
-    $tickets = Ticket::where(['agentId'=>$id])->where(['statusId'=>4])->count();
+    $tickets = Deposit::where(['agentId'=>$id])->where(['statusId'=>4])->count();
 
     return $tickets;
 }
-/*overal tickets opened in the system*/
+/*overal deposits opened in the system*/
 function openTickets()
 {
-	$tickets = Ticket::where(['statusId'=>1])->count();
+	$tickets = Deposit::where(['statusId'=>1])->count();
 
 	return $tickets;
 }
 
 function closedTickets()
 {
-	$tickets = Ticket::where(['statusId'=>2])->count();
+	$tickets = Deposit::where(['statusId'=>2])->count();
 
 	return $tickets;
 }
@@ -80,14 +80,14 @@ function getTotalUsersAuthorised()
 function getOpenTicketsMonthly()
 {
 	  $total = array();
-	  $intended = Ticket::select(DB::raw('count(*) as tickets'))
+	  $intended = Deposit::select(DB::raw('count(*) as deposits'))
                                                   ->where(['statusId'=>1])
                                                   ->groupBy('created_at')
-                                                  ->orderBy('tickets','asc')
+                                                  ->orderBy('deposits','asc')
                                                   ->get();
 
       foreach ($intended as $key => $value) {
-      	  $total[]=$value['tickets'];
+      	  $total[]=$value['deposits'];
       }
 
       return $total;
@@ -98,10 +98,10 @@ function getOpenTicketsMonthly()
 function  getMonth()
 {
 	 $month = array();
-	  $intended = Ticket::select(DB::raw('count(*) as tickets,created_at'))
+	  $intended = Deposit::select(DB::raw('count(*) as deposits,created_at'))
                                                   ->where(['statusId'=>1])
                                                   ->groupBy('created_at')
-                                                  ->orderBy('tickets','asc')
+                                                  ->orderBy('deposits','asc')
                                                   ->get();
 
       foreach ($intended as $key => $value) {
@@ -114,13 +114,13 @@ function  getMonth()
 function getClosed()
 {
 
- return  Ticket::where(['statusId'=>2])->count();
+ return  Deposit::where(['statusId'=>2])->count();
 }
 
 
 function getOpened()
 {
-   return  Ticket::where(['statusId'=>1])->count();
+   return  Deposit::where(['statusId'=>1])->count();
 }
 
 
@@ -128,14 +128,14 @@ function getOpened()
 function getReopened()
 {
 
-  return Ticket::where(['statusId'=>3])->count();
+  return Deposit::where(['statusId'=>3])->count();
 
 }
 
 function getOverdue()
 {
 
-    return Ticket::where(['statusId'=>4])->count();
+    return Deposit::where(['statusId'=>4])->count();
 
 }
 

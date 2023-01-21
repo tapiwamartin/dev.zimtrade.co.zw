@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Mail\SlaMonitorNotification;
 use App\Models\RoleUser;
-use App\Models\Ticket;
+use App\Models\Deposit;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -44,7 +44,7 @@ class SlaReminder extends Command
     public function handle()
     {
         /*Daily Reminder*/
-       $tickets =Ticket::whereNotNull('slaId')->get();
+       $tickets =Deposit::whereNotNull('slaId')->get();
         $role = RoleUser::where(['roleId'=>1])->pluck('userId');
         $admins = User::whereIn('id',$role)->pluck('email');
         foreach($tickets as $ticket )

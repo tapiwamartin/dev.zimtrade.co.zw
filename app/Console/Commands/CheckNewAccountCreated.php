@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Mail\NewUserRegistered;
+use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -41,11 +42,12 @@ class CheckNewAccountCreated extends Command
      */
     public function handle()
     {
-        $users = User::where(['isAuthorised'=>0])->whereNull('email_verified_at')->get();
-
+        $users = User::where(['isAuthorised'=>0])->whereNotNull('email_verified_at')->get();
+        $role = RoleUser::where(['roleId'=>1])->pluck('userId');
+        $admins = User::whereIn('id',$role)->pluck('email');
         foreach($users as $user )
         {
-            Mail::to('zimhelpdesk@zimtrade.co.zw')->queue(new NewUserRegistered($user));
+            Mail::to($admins)->queue(new NewUserRegistered($user));
     
         }
     }

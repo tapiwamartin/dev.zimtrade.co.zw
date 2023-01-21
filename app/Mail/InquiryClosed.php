@@ -32,7 +32,7 @@ class InquiryClosed extends Mailable
     public function build()
     {
         return $this->from('zimhelpdesk@zimtrade.co.zw')
-                ->markdown('emails.tickets.closed', [
+                ->markdown('emails.deposits.closed', [
                     'ticket'=>$this->ticket,
 
                 ]);

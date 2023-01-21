@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('layouts.welcome');
+    return view('auth.login');
 });
 
 
@@ -30,13 +30,14 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'dashboard
 
 
 Route::resource('user',App\Http\Controllers\UserController::class);
-Route::resource('department',App\Http\Controllers\DepartmentController::class);
-Route::resource('sector',\App\Http\Controllers\SectorController::class);
+Route::resource('narration',App\Http\Controllers\NarrationController::class);
+Route::resource('currency',App\Http\Controllers\CurrencyController::class);
+Route::resource('region',\App\Http\Controllers\RegionController::class);
 Route::resource('role',App\Http\Controllers\RoleController::class);
 Route::resource('status',App\Http\Controllers\StatusController::class);
 Route::resource('roleUser',App\Http\Controllers\RoleUserController::class);
 Route::resource('deptUser',App\Http\Controllers\DepartmentUserController::class);
-Route::resource('ticket',App\Http\Controllers\TicketController::class)->middleware('auth');
+Route::resource('deposit',App\Http\Controllers\DepositController::class)->middleware('auth');
 
 Route::resource('comment',App\Http\Controllers\CommentController::class);
 Route::get('getComments/{ticket}',[\App\Http\Controllers\CommentController::class,'getComments']);
@@ -54,11 +55,11 @@ Route::get('/userlog/{user}/',[App\Http\Controllers\UserActivityLogController::c
 Route::get('/user/auth/{id}',[\App\Http\Controllers\UserController::class,'authoriseUser'])->name('user.authorised');
 Route::get('/user/unauth/{id}',[\App\Http\Controllers\UserController::class,'unAuthoriseUser'])->name('user.unauthorise');
 
-Route::get('/closeTicket/{id}',[App\Http\Controllers\TicketController::class, 'closeTicket'])->name('close.ticket');
-Route::get('/reOpenTicket/{id}',[App\Http\Controllers\TicketController::class, 'reOpenTicket'])->name('reOpen.ticket');
+Route::get('/closeTicket/{id}',[App\Http\Controllers\DepositController::class, 'closeTicket'])->name('close.ticket');
+Route::get('/reOpenTicket/{id}',[App\Http\Controllers\DepositController::class, 'reOpenTicket'])->name('reOpen.ticket');
 
-Route::get('/assignTicketForm/{ticket}',[App\Http\Controllers\TicketController::class, 'assignTicketForm'])->name('ticket.assign');
-Route::post('/assignTicket',[App\Http\Controllers\TicketController::class, 'assignTicket'])->name('ticket.agent.assign');
+Route::get('/assignTicketForm/{ticket}',[App\Http\Controllers\DepositController::class, 'assignTicketForm'])->name('ticket.assign');
+Route::post('/assignTicket',[App\Http\Controllers\DepositController::class, 'assignTicket'])->name('ticket.agent.assign');
 //Reporting
 Route::get('/report/daily',[\App\Http\Controllers\ReportController::class,'daily'])->name('report.daily');
 Route::get('/report/monthly',[\App\Http\Controllers\ReportController::class,'monthly'])->name('report.monthly');
@@ -79,5 +80,7 @@ Route::post('/changePassword', [\App\Http\Controllers\UserController::class,'cha
 //Reports
 
 Route::get('/viewReport',[\App\Http\Controllers\ReportController::class,'dailyReport'])->name('report.agents');
+
+Route::get('/getUsers',[\App\Http\Controllers\UserController::class,'getAllUsers']);
 
 

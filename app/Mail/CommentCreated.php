@@ -34,7 +34,7 @@ class CommentCreated extends Mailable
     public function build()
     {
         return $this->from('zimhelpdesk@zimtrade.co.zw')
-            ->markdown('emails.tickets.comment', [
+            ->markdown('emails.deposits.comment', [
                 'ticket'=>$this->comment,
                 'comment'=>$this->ticket
 

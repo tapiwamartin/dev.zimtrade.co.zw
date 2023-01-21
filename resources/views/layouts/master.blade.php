@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>ZimTrade</title>
+    <title>Wallet</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -48,14 +48,14 @@
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-stack"></i>
-                            <span>Enquire</span>
+                            <span>Wallet Transactions</span>
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="{{route('ticket.index')}}">View Inquiries</a>
+                                <a href="{{route('deposit.index')}}">View Deposits</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="{{route('ticket.create')}}">Create Inquiry</a>
+                                <a href="{{route('deposit.create')}}">New Deposit</a>
                             </li>
 
                         </ul>
@@ -69,23 +69,21 @@
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="{{route('department.index')}}">Departments</a>
+                                <a href="{{route('region.index')}}">Regions</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{route('currency.index')}}">Currency</a>
+                            </li>
+                            <li class="submenu-item ">
+                                <a href="{{route('narration.index')}}">Narration</a>
                             </li>
                             <li class="submenu-item ">
                                 <a href="{{route('user.index')}}">Users</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="{{route('status.index')}}">Status</a>
-                            </li>
-                            <li class="submenu-item ">
-                                <a href="{{route('sector.index')}}">Sector</a>
-                            </li>
-                            <li class="submenu-item ">
                                 <a href="{{route('role.index')}}">Roles</a>
                             </li>
-                            <li class="submenu-item ">
-                                <a href="{{route('sla.index')}}">SLA</a>
-                            </li>
+
                         </ul>
                     </li>
                     <li class="sidebar-item  has-sub">
@@ -107,7 +105,7 @@
                                 <a href="{{route('report.range')}}">Range(Reports as per given range)</a>
                             </li>
                             <li class="submenu-item ">
-                                <a href="{{route('report.agents')}}">Overall Agents Report</a>
+                                <a href="{{route('report.agents')}}">Overall Wallet Report</a>
                             </li>
 
                         </ul>
@@ -116,11 +114,11 @@
                     <li class="sidebar-item  has-sub">
                         <a href="#" class='sidebar-link'>
                             <i class="bi bi-chat-dots"></i>
-                            <span>Newsletters</span>
+                            <span>Statement</span>
                         </a>
                         <ul class="submenu ">
                             <li class="submenu-item ">
-                                <a href="{{route('newsletter.index')}}">List</a>
+                                <a href="{{route('newsletter.index')}}">View</a>
                             </li>
 
                         </ul>
@@ -148,13 +146,13 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-                            <li class="nav-item dropdown me-1">
+<!--                            <li class="nav-item dropdown me-1">
                                 <a type="button" class="btn btn-outline-transparent" data-bs-toggle="modal"
                                    data-bs-target="#large">
                                     <i class='bi bi-question bi-sub fs-4 text-gray-600'></i>
                                 </a>
 
-                            </li>
+                            </li>-->
 
                             <li class="nav-item dropdown me-3">
                                 <a class="nav-link active dropdown-toggle" href="#" data-bs-toggle="dropdown"
@@ -241,34 +239,8 @@
                                     <i data-feather="x"></i>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <h6>Inquiry Creation</h6>
-                                <p>Click <a href="{{route('ticket.create')}}">Create Inquiry</a> link to create a ticket or request.
-                                    You are free to attach files if need be.
-                                </p>
-                                <h6>Inquiry Closing</h6>
-                                <p>Click <a href="{{route('ticket.index')}}">View Inquiries List</a> link to view all the  tickets you created.
-                                    Click <a href="">View inquiry</a> to have an overview of the inquiry. At this section you will be able
-                                    to click <button class="btn btn-outline-danger">Close Inquiry</button> to close an inquiry.
-                                </p>
-                                <h6>Inquiry Re-opening</h6>
-                                <p>Click <a href="{{route('ticket.index')}}">View Inquiries List</a> link to view all the  inquiries you created.
-                                    Click <a href="">View inquiry</a> to have an overview of the inquiry. At this section you will be able
-                                    to click <button class="btn btn-outline-info">Re-Open Inquiry</button> to re-open an inquiry. <b>NB :</b><u>You
-                                        can only reopen a inquiry that have been closed!
-                                    </u>
 
-                                </p>
 
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light-secondary"
-                                        data-bs-dismiss="modal">
-                                    <i class="bx bx-x d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Close Help Window</span>
-                                </button>
-
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -277,8 +249,8 @@
 
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>2021 &copy; ZimTrade</p>
+                    <div class="text-center">
+                        <p><script>document.write(new Date().getFullYear())</script> &copy Wallet</p>
                     </div>
 <!--                    <div class="float-end">
                         <p>System Developed with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>

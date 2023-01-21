@@ -30,7 +30,7 @@ class NewUserRegistered extends Mailable
     public function build()
     {
         return $this->from('zimhelpdesk@zimtrade.co.zw')
-            ->markdown('emails.tickets.newuser', [
+            ->markdown('emails.deposits.newuser', [
                 'user'=>$this->user
             ]);
     }

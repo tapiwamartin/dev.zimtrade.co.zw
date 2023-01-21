@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6" style="margin-top: 100px;">
 
-            <img src="{{asset('images/logo.png')}}" style="height: 150px; display: block;
+            <img src="{{asset('images/logo.png')}}" style="height: 100px; display: block;
     margin: 0 auto;">
 
     <div class="card border-bottom-success">

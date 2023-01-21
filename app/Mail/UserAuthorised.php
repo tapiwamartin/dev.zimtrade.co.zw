@@ -25,7 +25,7 @@ class UserAuthorised extends Mailable
     public function build()
     {
         return $this->from('zimhelpdesk@zimtrade.co.zw')
-            ->markdown('emails.tickets.authorised', [
+            ->markdown('emails.deposits.authorised', [
                 'user'=>$this->user
             ]);
     }

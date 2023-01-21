@@ -60,6 +60,7 @@
                                             <label for="country-floating">Country</label>
 
                                                 <select id="country" name="country" class="form-control @error('country') is-invalid @enderror" value="{{old('country')}}">
+                                                    <option value=""></option>
                                                     <option value="Afganistan">Afghanistan</option>
                                                     <option value="Albania">Albania</option>
                                                     <option value="Algeria">Algeria</option>

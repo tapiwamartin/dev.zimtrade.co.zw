@@ -20,16 +20,19 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
+   /* public function __construct()
     {
         $this->middleware(['auth','admin','verified'],['except'=>'profile']);
+    }*/
+
+    public function getAllUsers()
+    {
+        return User::with('roles')->get();
     }
-
-
 
     public function index()
     {
-       $users= User::whereNotIn('id',array(Auth::id()))->get();
+       $users= User::whereNotIn('id',array(Auth::id()))->whereNotNull('email_verified_at')->get();
         return view('admin.users')->withUsers($users);
 
 
@@ -64,7 +67,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $users= User::where('id',$id)->get();
+        return view('admin.userView')->withUsers($users);
     }
 
     /**

@@ -28,8 +28,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('sla:monitor')->everyMinute();
-        $schedule->command('newuser:check')->everyMinute();
-        $schedule->command('queue:work')->everyMinute();
+        $schedule->command('newuser:check')->everyTwoMinutes();
+        $schedule->command('queue:work')->everyFourMinutes();
         $schedule->command('sla:remind')->twiceDaily();
     }
 

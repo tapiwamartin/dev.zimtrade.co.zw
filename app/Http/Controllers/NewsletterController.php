@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Newsletter;
 use App\Models\newsletterFile;
-use App\Models\Ticket;
+use App\Models\Deposit;
 use App\Models\User;
 use App\Notifications\NewsLetterCreated;
 use Illuminate\Database\Eloquent\Model;
@@ -76,7 +76,7 @@ class NewsletterController extends Controller
             //Mail::to($agent)->send(new InquiryOpened($ticket));
         }
         return redirect()->route('ticket.index');
-        //return response()->json(['data'=>'Ticket Created Successfully']);
+        //return response()->json(['data'=>'Deposit Created Successfully']);
 
     }
 

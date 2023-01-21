@@ -30,8 +30,8 @@ class HomeController extends Controller
     {
 
 
-        $data = getOpenTicketsMonthly();
+       // $data = getOpenTicketsMonthly();
 
-         return view('admin.dashboard')->withData($data);//->withMonth($month);
+         return view('admin.dashboard');
     }
 }
