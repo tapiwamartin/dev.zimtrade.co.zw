@@ -18,15 +18,17 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 @foreach($regions as $region)
-                                <table class="table table-bordered" id="table1" >
+                                <table class="table table-bordered"  >
                                     <tr><u><b class="text-uppercase">{{$region->name}}</b></u></tr>
                                     <thead>
                                         <tr>
-                                            <th>Re</th>
-                                            <th>Closed</th>
-                                            <th>Opened</th>
-                                            <th>Re-opened</th>
-                                            <th>Overdue</th>
+                                            <th>#</th>
+                                            <th>Amount</th>
+                                            <th>Transaction Date</th>
+                                            <th>User</th>
+                                            <th>Region</th>
+                                            <th>Narration</th>
+                                            <th>Currency</th>
 
                                         </tr>
                                     </thead>
@@ -36,7 +38,14 @@
 
                                         @foreach($region->deposits as $deposit)
                                             <tr>
-                                                <td>{{$deposit->user->email}}</td>
+                                                <td>{{$deposit->id}}</td>
+                                                <td>{{$deposit->amount}}</td>
+                                                <td>{{$deposit->transactionDate}}</td>
+                                                <td>{{$deposit->user->name}}</td>
+                                                <td>{{$deposit->region->name}}</td>
+                                                <td>{{$deposit->narration->name}}</td>
+                                                <td>{{$deposit->currency->code}}</td>
+                                                <td>{{\Carbon\Carbon::parse($deposit->created_at)->diffForHumans()}}</td>
                                             </tr>
                                         @endforeach
                                     @endforeach

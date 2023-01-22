@@ -56,7 +56,7 @@
             <div class="card-body">
                 <img src="{{asset('images/statement.png')}}" style="height: 100px; display: block;
     margin: 0 auto;">
-                <h6><a href="{{route('deposit.create')}}" style="text-decoration:none;" class="text-center">View Regions</a></h6>
+                <h6><a href="{{route('region.index')}}" style="text-decoration:none;" class="text-center">View Regions</a></h6>
 
             </div>
         </div>
